@@ -1,49 +1,28 @@
 package com.vrinceanuvladut.routerportserver.selenium;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import java.util.Scanner;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class TestRouterConnection {
 
     @Test
     void loginPageTestPositiveCase(){
-        //TODO implementation of testcase
-    }
+        // Scanner scanner = new Scanner(System.in);
+        // System.out.println("Enter ip address (eg. https://192.168.1.1): ");
+        // String ip = scanner.nextLine();
+        // System.out.println("Enter username: ");
+        // String username = scanner.nextLine();
+        // System.out.println("Enter password: ");
+        // String password = scanner.nextLine();
 
-    @Test
-    void loginPageTestNegativeCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void openAccessControlPageTestPositiveCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void openAccessControlPageTestNegativeCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void openPortForwardingPageTestPositiveCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void openPortForwardingPageTestNegativeCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void portForwardingStatusTestPositiveCase(){
-        //TODO implementation of testcase
-    }
-
-    @Test
-    void portForwardingStatusTestNegativeCase(){
-        //TODO implementation of testcase
+        // RouterConnection routerConnection = new RouterConnection("D:/sleniumdriver/chromedriver_win32/chromedriver.exe");
+        // routerConnection.loginPage(ip,username, password);
+        // routerConnection.openAccessControlPage();
+        // routerConnection.openPortForwardingPage();
+        // routerConnection.portForwardingStatus(true);
+        // routerConnection.logout();
+        // routerConnection.close();
     }
     
 }
