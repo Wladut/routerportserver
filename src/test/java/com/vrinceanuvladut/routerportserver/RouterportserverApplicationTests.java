@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class RouterportserverApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void checkActivatePortPositiveCase() {
+
 	}
 
 }
