@@ -2,91 +2,73 @@ package com.vrinceanuvladut.routerportserver.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RouterConnection implements IRouterConnection {
 
     private WebDriver chromeDriver;
+    private WebDriverWait webDriverWait;
+    private final int WAIT_TIME = 10;
 
     public RouterConnection(String webDriverPath){
-        System.setProperty("webdriver.chrome.driver", webDriverPath);
-        ChromeOptions chromeOptions = new ChromeOptions();
-        this.chromeDriver = new ChromeDriver();  
+        System.setProperty("webdriver.chrome.driver", webDriverPath);      
+        ChromeOptions chromeOptions = new ChromeOptions();      
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--start-maximized");
+        this.chromeDriver = new ChromeDriver(); 
+        webDriverWait = new WebDriverWait(chromeDriver, WAIT_TIME); 
     }
 
     @Override
     public boolean loginPage(String loginPage, String name, String password) {
         Boolean result = true;
         chromeDriver.get(loginPage);
-        WebElement advanceButton = chromeDriver.findElement(By.id("details-button"));
-        advanceButton.click();
-        WebElement proceedLink = chromeDriver.findElement(By.id("proceed-link"));
-        proceedLink.click();
-        wait(5);
-        WebElement username = chromeDriver.findElement(By.id("name"));
-        WebElement pword = chromeDriver.findElement(By.id("password"));
-        WebElement loginButton = chromeDriver.findElement(By.id("button-blue"));
-        username.sendKeys(name);
-        pword.sendKeys(password);
-        loginButton.click();
-        wait(25);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("details-button"))).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("proceed-link"))).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("name"))).sendKeys(name);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("password"))).sendKeys(password);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("button-blue"))).click();
         return result;
     }
 
     @Override
     public boolean openAccessControlPage() {
         Boolean result = true;
-        WebElement accessControl = chromeDriver.findElement(By.cssSelector("a[ui-sref='user.accessControl']"));
-        accessControl.click();
-        wait(5);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[ui-sref='user.accessControl']"))).click();
         return result;
     }
 
     @Override
     public boolean openPortForwardingPage() {
         Boolean result = true;
-        WebElement portForwardingTabButton = chromeDriver.findElement(By.cssSelector("a[ui-sref='user.accessControl.portForwarding']"));
-        portForwardingTabButton.click();
-        wait(5);
+        webDriverWait.until(ExpectedConditions
+        .elementToBeClickable(By.cssSelector("a[ui-sref='user.accessControl.portForwarding']"))).click();
         return result;
     }
 
     @Override
     public boolean portForwardingStatus(boolean activationStatus) {
         Boolean result = true;
-        WebElement togglePortForwardButton = chromeDriver.findElement(By.xpath(".//*[@for='port-00']"));
-        togglePortForwardButton.click();
-        WebElement applyButton = chromeDriver.findElement(By.xpath("//*[@ng-click='apply()']"));
-        applyButton.click();
-        wait(5);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@for='port-00']"))).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@ng-click='apply()']"))).click();
         return result;
     }
 
     @Override
     public boolean logout(){
         Boolean result = true;
-        WebElement applyButton = chromeDriver.findElement(By.xpath("//*[@ng-click='logout()']"));
-        applyButton.click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@ng-click='logout()']"))).click();
         return result;
     }
 
     @Override
     public boolean close(){
         Boolean result = true;
-        wait(3);
         chromeDriver.close();
         return result;
-    }
-
-    private void wait(int seconds){
-        try {
-            Thread.sleep(seconds*1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 }
 
