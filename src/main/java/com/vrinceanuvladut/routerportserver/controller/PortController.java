@@ -5,9 +5,11 @@ import com.vrinceanuvladut.routerportserver.selenium.RouterConnection;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+/* Example of Http request with parameters 
+http://localhost:8083/activateport?ip=&username=&password=  */
 
 @RestController
-public class PortController {   
+public class PortController {  
 
     private boolean portActivationStatus = false;
 
